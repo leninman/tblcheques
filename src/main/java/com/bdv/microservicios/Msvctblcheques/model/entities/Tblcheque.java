@@ -4,6 +4,7 @@ package com.bdv.microservicios.Msvctblcheques.model.entities;
 import lombok.*;
 
 import javax.persistence.*;
+import java.awt.*;
 import java.io.Serializable;
 
 @NoArgsConstructor
@@ -12,122 +13,146 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Entity
-@Table(name="TblCheques")
+@NamedStoredProcedureQueries({
+        @NamedStoredProcedureQuery(
+                name = "Tblcheque",
+                procedureName = "sp_ICS_tblCheques",
+                parameters = {
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "Accion", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "FechaContable", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "Cod_Banco", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "Agencia", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "Cajero", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "Din", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "Serial", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "Banco", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "Oficina", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "Dv", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "Cuenta", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "TranCode", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "Monto", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "Front", type = Byte[].class),
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "Rear", type = Byte[].class),
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "Corregido", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "Transmitido", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "CuentaDepo", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "SerialP", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "Dna", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "Estatus", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "Auxiliar1", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "Auxiliar2", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "Auxiliar3", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "Auxiliar4", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "Auxiliar5", type = String.class),
+                        @StoredProcedureParameter(mode = ParameterMode.IN, name = "TransmitidoOracle", type = String.class),
+
+                })
+
+
+})
 public class Tblcheque implements Serializable {
-    
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Column(name="FechaContable")
+
     String fechaContable;
 
 
-    @Column(name="Cod_Banco")
+
     String codBanco;
 
 
-    @Column(name="Agencia")
+
     String agencia;
 
 
-    @Column(name="Cajero")
+
     String cajero;
 
 
-    @Column(name="Din")
+
     String din;
 
 
-    @Column(name="Serial")
+
     String serial;
 
 
-    @Column(name="Banco")
+
     String banco;
 
 
-    @Column(name="Oficina")
+
     String oficina;
 
 
-    @Column(name="Dv")
+
     String dv;
 
 
-    @Column(name="Cuenta")
+
     String cuenta;
 
 
-    @Column(name="TranCode")
+
     String tranCode;
 
 
-    @Column(name="Monto")
+
     String monto;
 
 
-    @Column(name="Front")
+
     String front;
 
-    @Column(name="Rear")
+
     String rear;
 
 
-    @Column(name="Corregido")
+
     String corregido;
 
 
-    @Column(name="Transmitido")
+
     String trasmitido;
 
 
-    @Column(name="CuentaDepo")
+
     String cuentaDepo;
 
 
-    @Column(name="SerialP")
+
     String serialP;
 
 
-    @Column(name="Dna")
+
     String dna;
 
 
-    @Column(name="Estatus")
+
     String estatus;
 
 
-    @Column(name="Auxiliar1")
+
     String auxiliar1;
 
-    @Column(name="Auxiliar2")
+
     String auxiliar2;
 
-    @Column(name="Auxiliar3")
+
     String auxiliar3;
 
-    @Column(name="Auxiliar4")
+
     String auxiliar4;
 
-    @Column(name="Auxiliar5")
+
     String auxiliar5;
 
 
-    @Column(name="TransmitidoOracle")
+
     String transmitidoOracle;
-
-
-
-
-
-
-
-
-
-
-
 
 
 
