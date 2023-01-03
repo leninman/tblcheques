@@ -4,10 +4,10 @@ import com.bdv.microservicios.Msvctblcheques.model.entities.Tblcheque;
 
 public interface TblChequesService {
 
-    Tblcheque consultarCheque(String banco,String oficina,String dv,String cuenta, String serial);
+    Tblcheque consultarTblCheque(String banco,String oficina,String dv,String cuenta, String serial);
 
 
-    Tblcheque guardarCheque(Tblcheque tblcheque);
+    Tblcheque guardarTblCheque(Tblcheque tblcheque);
 
 
 }
