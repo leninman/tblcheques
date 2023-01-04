@@ -44,10 +44,6 @@ public interface TblchequeRepo extends JpaRepository<Tblcheque,Long> {
             "Banco=?1 and Oficina=?2 and Dv=?3 and Cuenta=?4 and Serial=?5",nativeQuery = true)
     Tblcheque findTblCheque(String banco, String oficina, String dv, String cuenta, String serial);*/
 
-
-
-
-
     @Query(value="SELECT * " +
             "FROM " +
             "TblCheques a " +
