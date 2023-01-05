@@ -33,7 +33,7 @@ public class TblChequesServiceImpl implements TblChequesService{
         String Front=(tblcheque.getFront()).substring(2);
         byte[] FrontConvertida=becomeFront(Front);
         String Rear=(tblcheque.getRear()).substring(2);
-        byte[] RearConvrtida=becomeRear(Rear);
+        byte[] RearConvertida=becomeRear(Rear);
         String Corregido=tblcheque.getCorregido();
         String Transmitido=tblcheque.getTransmitido();
         String CuentaDepo= tblcheque.getCuentadepo();
@@ -48,22 +48,7 @@ public class TblChequesServiceImpl implements TblChequesService{
         String TransmitidoOracle= tblcheque.getTransmitidooracle();
 
 
-        tblchequesRepo.sp_ICS_tblCheques("INSERT",FechaContable,Cod_Banco,Agencia,Cajero,Din,Serial,Banco,Oficina,Dv,Cuenta);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        tblchequesRepo.sp_ICS_tblCheques("INSERT",FechaContable,Cod_Banco,Agencia,Cajero,Din,Serial,Banco,Oficina,Dv,Cuenta,TranCode,Monto,FrontConvertida,RearConvertida,Corregido,Transmitido,CuentaDepo,SerialP,Dna,Estatus,Auxiliar1,Auxiliar2,Auxiliar3,Auxiliar4,Auxiliar5,TransmitidoOracle);
 
 
         return tblcheque;

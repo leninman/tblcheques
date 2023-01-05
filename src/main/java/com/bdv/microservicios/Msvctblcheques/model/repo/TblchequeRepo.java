@@ -59,7 +59,7 @@ public interface TblchequeRepo extends JpaRepository<Tblcheque,Long> {
 
 
     @Procedure
-    Tblcheque sp_ICS_tblCheques(@Param("Accion") String Accion,
+    void sp_ICS_tblCheques(@Param("Accion") String Accion,
                            @Param("FechaContable") String FechaContable,
                            @Param("Cod_Banco") String Cod_Banco,
                            @Param("Agencia") String Agencia,
@@ -69,6 +69,22 @@ public interface TblchequeRepo extends JpaRepository<Tblcheque,Long> {
                            @Param("Banco") String Banco,
                            @Param("Oficina") String Oficina,
                            @Param("Dv") String Dv,
-                           @Param("Cuenta") String Cuenta
-                           );
+                           @Param("Cuenta") String Cuenta,
+                           @Param("TranCode") String TranCode,
+                           @Param("Monto") String Monto,
+                           @Param("Front") byte[] Front,
+                           @Param("Rear") byte[] Rear,
+                           @Param("Corregido") String Corregido,
+                           @Param("Transmitido") String Transmitido,
+                           @Param("CuentaDepo") String CuentaDepo,
+                           @Param("SerialP") String SerialP,
+                           @Param("Dna") String Dna,
+                           @Param("Estatus") String Estatus,
+                           @Param("Auxiliar1") String Auxiliar1,
+                           @Param("Auxiliar2") String Auxiliar2,
+                           @Param("Auxiliar3") String Auxiliar3,
+                           @Param("Auxiliar4") String Auxiliar4,
+                           @Param("Auxiliar5") String Auxiliar5,
+                           @Param("TransmitidoOracle") String TransmitidoOracle
+    );
 }
