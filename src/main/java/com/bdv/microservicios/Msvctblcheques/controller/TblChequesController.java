@@ -4,11 +4,16 @@ import com.bdv.microservicios.Msvctblcheques.model.entities.Tblcheque;
 import com.bdv.microservicios.Msvctblcheques.model.entities.security.AuthenticationRequest;
 import com.bdv.microservicios.Msvctblcheques.model.entities.security.TokenInfo;
 import com.bdv.microservicios.Msvctblcheques.services.TblChequesService;
+import com.bdv.microservicios.Msvctblcheques.services.security.JwtUtilService;
+import com.bdv.microservicios.Msvctblcheques.services.security.UsuarioDetailsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -16,6 +21,14 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("app")
 public class TblChequesController {
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+    @Autowired
+    UsuarioDetailsService usuarioDetailsService;
+    @Autowired
+    JwtUtilService jwtService;
+
 
     private static final Logger logger = LoggerFactory.getLogger(TblChequesController.class);
     @Autowired
@@ -57,8 +70,18 @@ public class TblChequesController {
     @PostMapping("authenticate")
     public ResponseEntity<TokenInfo> authenticate(@RequestBody AuthenticationRequest authenticationRequest){
             logger.info("Autenticando al usuario {}",authenticationRequest.getUsuario());
+            authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(authenticationRequest.getUsuario(),
+                authenticationRequest.getClave()));
 
-            return null;
+            final UserDetails userDetails=usuarioDetailsService.loadUserByUsername(authenticationRequest.getUsuario());
+
+            final String jwt = jwtService.generateToken(userDetails);
+
+            TokenInfo tokenInfo=new TokenInfo(jwt);
+
+            return ResponseEntity.ok(tokenInfo);
+
     }
 
 

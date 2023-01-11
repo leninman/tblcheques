@@ -1,16 +1,20 @@
 package com.bdv.microservicios.Msvctblcheques.config;
 
+import com.bdv.microservicios.Msvctblcheques.security.JwtRequestFilter;
 import com.bdv.microservicios.Msvctblcheques.services.security.UsuarioDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -20,11 +24,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     UsuarioDetailsService usuarioDetailsService;
+    @Autowired
+    JwtRequestFilter jwtRequestFilter;
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.httpBasic(withDefaults()).authorizeRequests()
+        http
+                //.httpBasic(withDefaults()).authorizeRequests()
+                .csrf().disable()
+                .authorizeRequests()
                 .antMatchers("/app/getTblCheque/**").hasRole("admin")
-                .anyRequest().authenticated();
+                .antMatchers("/app/authenticate").permitAll()
+                .anyRequest().authenticated()
+                .and().cors()
+                .and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+
+
     }
 
 
@@ -35,6 +51,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
        /* auth.inMemoryAuthentication().withUser("Tblcheque").password("{noop}"+"Microserviciotblechequepassword").roles("admin")
                 .and()
                 .withUser("user").password("{noop}"+"12345").roles("user");*/
+    }
+    @Override
+    @Bean
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 
 
