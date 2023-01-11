@@ -1,15 +1,23 @@
 package com.bdv.microservicios.Msvctblcheques.controller;
 
 import com.bdv.microservicios.Msvctblcheques.model.entities.Tblcheque;
+import com.bdv.microservicios.Msvctblcheques.model.entities.security.AuthenticationRequest;
+import com.bdv.microservicios.Msvctblcheques.model.entities.security.TokenInfo;
 import com.bdv.microservicios.Msvctblcheques.services.TblChequesService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
+
 @RestController
 @RequestMapping("app")
 public class TblChequesController {
+
+    private static final Logger logger = LoggerFactory.getLogger(TblChequesController.class);
     @Autowired
     TblChequesService tblChequesService;
     @GetMapping("getTblCheque")
@@ -45,5 +53,13 @@ public class TblChequesController {
         return ResponseEntity.status(HttpStatus.CREATED).body(tblchequeguardado);
 
     }
+
+    @PostMapping("authenticate")
+    public ResponseEntity<TokenInfo> authenticate(@RequestBody AuthenticationRequest authenticationRequest){
+            logger.info("Autenticando al usuario {}",authenticationRequest.getUsuario());
+
+            return null;
+    }
+
 
 }

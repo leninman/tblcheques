@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+
 @SpringBootApplication
 public class MsvcTblchequesApplication {
 
@@ -11,7 +12,7 @@ public class MsvcTblchequesApplication {
 
 		SpringApplication.run(MsvcTblchequesApplication.class, args);
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		String encodedPassword = passwordEncoder.encode("lenin123");
+		String encodedPassword = passwordEncoder.encode("Microserviciotblechequepassword");
 
 		System.out.println(encodedPassword);
 
