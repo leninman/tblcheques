@@ -32,7 +32,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 //.httpBasic(withDefaults()).authorizeRequests()
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/app/getTblCheque/**").hasRole("admin")
                 .antMatchers("/app/authenticate").permitAll()
                 .anyRequest().authenticated()
                 .and().cors()

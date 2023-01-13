@@ -11,10 +11,10 @@ public class MsvcTblchequesApplication {
 	public static void main(String[] args) {
 
 		SpringApplication.run(MsvcTblchequesApplication.class, args);
-		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		/*BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String encodedPassword = passwordEncoder.encode("Microserviciotblechequepassword");
 
-		System.out.println(encodedPassword);
+		System.out.println(encodedPassword);*/
 
 	}
 

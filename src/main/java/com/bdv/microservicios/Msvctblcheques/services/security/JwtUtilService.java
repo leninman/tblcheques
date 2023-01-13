@@ -17,7 +17,7 @@ public class JwtUtilService {
     // LLAVE_MUY_SECRETA => [Base64] => TExBVkVfTVVZX1NFQ1JFVEE=
     private static final String JWT_SECRET_KEY = "TExBVkVfTVVZX1NFQ1JFVEE=";
 
-    public static final long JWT_TOKEN_VALIDITY = 1000 * 60 * 60 * (long) 8; // 8 Horas
+    public static final long JWT_TOKEN_VALIDITY = 1000 * 60 * 60 * (long) 1; // 8 Horas
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -55,7 +55,7 @@ public class JwtUtilService {
                 .setSubject(subject)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY))
-                .signWith(SignatureAlgorithm.HS256, JWT_SECRET_KEY)
+                .signWith(SignatureAlgorithm.HS512, JWT_SECRET_KEY)
                 .compact();
     }
 
