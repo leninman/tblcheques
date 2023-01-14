@@ -25,10 +25,17 @@ public class Usuario implements Serializable {
 	private String password;
 
 
+	private Boolean enabled;
+
+
+
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id")
+	//@OneToMany(mappedBy = "users")
 	private List<Rol> roles;
+
+
 
 
 	/**

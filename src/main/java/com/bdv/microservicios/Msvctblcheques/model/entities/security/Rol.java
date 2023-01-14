@@ -1,9 +1,14 @@
 package com.bdv.microservicios.Msvctblcheques.model.entities.security;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "authorities", uniqueConstraints= {@UniqueConstraint(columnNames= {"user_id", "authority"})})
 public class Rol implements Serializable {
 
@@ -13,25 +18,12 @@ public class Rol implements Serializable {
 
 	private String authority;
 
-	public Long getId() {
-		return id;
-	}
+	@ManyToOne()
+	@JoinColumn(name="user_id")
+	private Usuario usuario;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
 
-	public String getAuthority() {
-		return authority;
-	}
 
-	public void setAuthority(String authority) {
-		this.authority = authority;
-	}
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 }

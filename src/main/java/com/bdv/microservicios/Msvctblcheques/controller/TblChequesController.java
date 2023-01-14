@@ -3,7 +3,9 @@ package com.bdv.microservicios.Msvctblcheques.controller;
 import com.bdv.microservicios.Msvctblcheques.model.entities.Tblcheque;
 import com.bdv.microservicios.Msvctblcheques.model.entities.security.AuthenticationRequest;
 import com.bdv.microservicios.Msvctblcheques.model.entities.security.TokenInfo;
+import com.bdv.microservicios.Msvctblcheques.model.entities.security.Usuario;
 import com.bdv.microservicios.Msvctblcheques.services.TblChequesService;
+import com.bdv.microservicios.Msvctblcheques.services.security.IUsuarioService;
 import com.bdv.microservicios.Msvctblcheques.services.security.JwtUtilService;
 import com.bdv.microservicios.Msvctblcheques.services.security.UsuarioDetailsService;
 import org.slf4j.Logger;
@@ -28,11 +30,12 @@ public class TblChequesController {
     UsuarioDetailsService usuarioDetailsService;
     @Autowired
     JwtUtilService jwtService;
-
-
     private static final Logger logger = LoggerFactory.getLogger(TblChequesController.class);
     @Autowired
     TblChequesService tblChequesService;
+    @Autowired
+    IUsuarioService usuarioService;
+
     @GetMapping("getTblCheque")
     public ResponseEntity<Tblcheque> verTblCheque(
             @RequestParam String banco,
@@ -82,6 +85,13 @@ public class TblChequesController {
 
             return ResponseEntity.ok(tokenInfo);
 
+    }
+
+
+    @PostMapping("crearusuario")
+    public ResponseEntity<Usuario> crearUsuario(@RequestBody Usuario usuario){
+        Usuario usuarioguardado=usuarioService.salvarUsuario(usuario);
+        return ResponseEntity.status(HttpStatus.CREATED).body(usuarioguardado);
     }
 
 
