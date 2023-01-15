@@ -88,11 +88,29 @@ public class TblChequesController {
     }
 
 
-    @PostMapping("crearusuario")
+    @PostMapping("usuario/crear")
     public ResponseEntity<Usuario> crearUsuario(@RequestBody Usuario usuario){
         Usuario usuarioguardado=usuarioService.salvarUsuario(usuario);
         return ResponseEntity.status(HttpStatus.CREATED).body(usuarioguardado);
     }
+
+    @GetMapping("/usuario/obtener")
+    public ResponseEntity<Usuario> getUsuario(@RequestParam String nombredeusuario){
+        Usuario usuario=usuarioService.consultarUsuario(nombredeusuario);
+        if (usuario==null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(usuario);
+    }
+
+
+    @DeleteMapping("usuario/eliminar")
+    public ResponseEntity<?> deleteUsuario(@RequestParam Long idusario){
+        usuarioService.eliminarUsuario(idusario);
+        return ResponseEntity.noContent().build();
+    }
+
+
 
 
 }

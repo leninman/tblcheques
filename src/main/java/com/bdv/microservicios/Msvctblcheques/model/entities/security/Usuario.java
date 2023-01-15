@@ -1,6 +1,7 @@
 package com.bdv.microservicios.Msvctblcheques.model.entities.security;
 
 import com.bdv.microservicios.Msvctblcheques.model.entities.security.Rol;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,6 +17,7 @@ public class Usuario implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonIgnore
 	private Long id;
 
 	@Column(length = 10, unique = true)
