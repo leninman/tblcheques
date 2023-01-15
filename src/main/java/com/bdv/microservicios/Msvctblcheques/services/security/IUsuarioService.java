@@ -9,6 +9,6 @@ public interface IUsuarioService {
 
     void eliminarUsuario(Long idUsuario);
 
-    Usuario modificarusuario(Long idUsuario,Usuario usuario);
+    Usuario modificarusuario(Usuario usuario);
 
 }

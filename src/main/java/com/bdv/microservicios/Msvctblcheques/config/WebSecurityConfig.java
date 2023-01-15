@@ -33,8 +33,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/app/authenticate").permitAll()
-                .antMatchers("/app/usuario?**").hasRole("admin")
-                //.antMatchers("/app/obtenerusuario").permitAll()
+                .antMatchers("/app/usuario/**").hasAuthority("admin")
+                .antMatchers("/app/getTblCheque").hasAnyAuthority("admin","owner","consulta")
+                .antMatchers("/app/saveTblCheque").hasAnyAuthority("admin","owner")
+
                 .anyRequest().authenticated()
                 .and().cors()
                 .and()

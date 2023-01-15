@@ -105,9 +105,15 @@ public class TblChequesController {
 
 
     @DeleteMapping("usuario/eliminar")
-    public ResponseEntity<?> deleteUsuario(@RequestParam Long idusario){
-        usuarioService.eliminarUsuario(idusario);
+    public ResponseEntity<?> deleteUsuario(@RequestParam Long idusuario){
+        usuarioService.eliminarUsuario(idusuario);
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("usuario/modificar")
+    public ResponseEntity<Usuario> updateUsuario(@RequestBody Usuario usuario){
+        Usuario usuariomodificado=usuarioService.modificarusuario(usuario);
+        return ResponseEntity.ok(usuariomodificado);
     }
 
 

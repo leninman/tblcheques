@@ -18,18 +18,19 @@ public class IUsuarioServiceImpl implements IUsuarioService {
     public Usuario salvarUsuario(Usuario usuario) {
 
         Usuario usuarioconsultado=usuarioRepo.findUsuarioByUsername(usuario.getUsername());
-        if(usuarioconsultado!=null){
-            usuario.setId(usuarioconsultado.getId());
-            usuarioconsultado.setRoles(usuario.getRoles());
-            usuario.setRoles(usuarioconsultado.getRoles());
-        }
-        usuario.setEnabled(true);
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String encodedPassword = passwordEncoder.encode(usuario.getPassword());
-        usuario.setPassword(encodedPassword);
-        usuarioaguardado = usuarioRepo.save(usuario);
 
-        return usuarioaguardado;
+        if(usuarioconsultado==null) {
+            usuario.setEnabled(true);
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            String encodedPassword = passwordEncoder.encode(usuario.getPassword());
+            usuario.setPassword(encodedPassword);
+            usuarioaguardado = usuarioRepo.save(usuario);
+            return usuarioaguardado;
+        }else{
+            usuario.setEnabled(usuarioconsultado.getEnabled());
+            return usuario;
+        }
+
 
     }
 
@@ -44,7 +45,22 @@ public class IUsuarioServiceImpl implements IUsuarioService {
     }
 
     @Override
-    public Usuario modificarusuario(Long idUsuario, Usuario usuario) {
-        return null;
+    public Usuario modificarusuario(Usuario usuario) {
+        Usuario usuarioconsultado=usuarioRepo.findUsuarioByUsername(usuario.getUsername());
+
+        if(usuarioconsultado!=null){
+            usuario.setId(usuarioconsultado.getId());
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            String encodedPassword = passwordEncoder.encode(usuario.getPassword());
+            usuario.setPassword(encodedPassword);
+            usuario.setRoles(usuarioconsultado.getRoles());
+            usuario.setEnabled(usuarioconsultado.getEnabled());
+            usuarioaguardado=usuarioRepo.save(usuario);
+            return usuarioaguardado;
+
+        }
+        else {
+            return usuario;
+        }
     }
 }
